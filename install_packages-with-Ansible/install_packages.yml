@@ -1,0 +1,28 @@
+---
+- name: Install Packages
+  hosts: web
+  become: true
+  vars:
+    packages:
+      - name: nginx
+        required: true
+      - name: httpd
+        required: true
+      - name: git
+        required: true
+  tasks:
+    - name: install packages
+      ansible.builtin.yum:
+        name: "{{item.name}}"
+        state: present
+      when: item.required == true
+      loop: "{{ packages }}"
+
+    - name: verify installation
+      ansible.builtin.shell: "rpm -q {{item.name}}"
+      register: result
+      loop: "{{ packages }}"
+
+    - name: print result
+      ansible.builtin.debug:
+        var: result.msg
