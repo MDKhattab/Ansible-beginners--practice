@@ -1,0 +1,11 @@
+---
+- name: check /etc/passwd file
+  hosts: web
+  become: true
+  tasks:
+    - name: check /etc/passwd file
+      ansible.builtin.shell: cat /etc/passwd | grep root
+      register: passwd_file
+    - name: debug /etc/passwd file
+      ansible.builtin.debug:
+        var: passwd_file.stdout_lines
