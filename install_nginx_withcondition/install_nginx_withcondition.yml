@@ -1,0 +1,15 @@
+---
+- name: Install OS with condition
+  hosts: web
+  become: true
+  tasks:
+    - name: Install nginx on CentOS
+      ansible.builtin.yum:
+        name: nginx
+        state: absent
+      when: ansible_facts['distribution'] == "CentOS"
+    - name: Install nginx on Ubuntu
+      ansible.builtin.apt:
+        name: nginx
+        state: absent
+      when: ansible_facts['distribution'] == "Ubuntu"
