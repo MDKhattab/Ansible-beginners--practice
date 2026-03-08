@@ -1,0 +1,9 @@
+---
+- name: test diff check mode
+  hosts: web
+  become: true
+  tasks:
+    - name: test diff check mode
+      copy:
+        dest: /tmp/test.txt
+        content: "test diff check mode more more"

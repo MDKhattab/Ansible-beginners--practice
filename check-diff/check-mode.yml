@@ -1,0 +1,11 @@
+---
+- name: Check mode
+  hosts: web
+  become: true
+  tasks:
+    - name: install nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+        
+      
