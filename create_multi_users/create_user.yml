@@ -1,0 +1,9 @@
+---
+- name: Create a user
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create a user
+      ansible.builtin.user:
+        name: testuser
+        state: present
